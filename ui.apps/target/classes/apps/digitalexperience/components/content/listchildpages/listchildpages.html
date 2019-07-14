@@ -1,0 +1,24 @@
+<div
+	data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+	data-sly-use.navigation="com.apple.demo.core.useapi.ListChildPages"
+	data-sly-test.hasContent="${navigation.items.size > 0}"></div>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasContent}"></sly>
+
+
+<div>
+	<ul>
+		<li class="nav navbar-nav navbar-left"
+			data-sly-repeat="${navigation.items}"><a
+			href="${item.path}.html">${item.title}</a></li>
+	</ul>
+</div>
+
+<template data-sly-template.nav="${ @ page}">
+    <ul data-sly-list="${page.listChildren}">
+        <li>
+            <div class="title">${item.title}</div>
+            <div data-sly-call="${nav @ page=item}" data-sly-unwrap></div>
+        </li>
+    </ul>
+</template>
+<div data-sly-call="${nav @ page=currentPage}" data-sly-unwrap></div>
